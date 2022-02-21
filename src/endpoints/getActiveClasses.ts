@@ -1,4 +1,16 @@
 import { Request, Response } from "express"
-import { connection } from "../data/connection"
+import { getActiveClassesByModulDataBase } from "../services/getActiveClasesByModulDataBase"
 
-export const getActiveClasses = ""
+
+export const getActiveClassesByModul = async(req:Request, res:Response):Promise<void> => {
+    let errorCode = 404
+
+    try {
+
+        const result = await getActiveClassesByModulDataBase()
+        res.status(200).send(result)
+
+    } catch (error:any) {
+        res.status(errorCode).send(error.message)
+    }
+}
